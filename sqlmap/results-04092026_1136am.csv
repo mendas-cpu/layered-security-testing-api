@@ -1,0 +1,2 @@
+Target URL,Place,Parameter,Technique(s),Note(s)
+http://localhost:8888/vulnerabilities/sqli/?id=1&Submit=Submit,GET,id,BETU,
