@@ -16,6 +16,8 @@ def get_status(port):
         25:"HIGH",
         53:"HIGH",
         #services or databases ports
+        137:"CRITICAL",
+        138:"CRITICAL",
         3306: "CRITICAL",
         5432: "CRITICAL",
         27017: "CRITICAL",
@@ -28,13 +30,23 @@ def get_status(port):
         return "MEDIUM"
     return status[port]
 
-
-def launch_scan(target_address,target_port=""):
+#launches the nmap scan, note that the scan can take a domain of ports so it's not limited to one port that's what
+#gives the advantage of scanning the whole business related to the ip address
+def launch_scan(target_address,target_ports=""):
     try:
         nm = nmap.PortScanner()
-        nm.scan(target_address,target_port,arguments="-sV")
-        return nm
+        if target_ports != "":
+            nm.scan(target_address,target_ports,arguments="-sV")
+            return nm.csv()
+        else:
+            nm.scan(target_address,arguments="-sV")
+            return nm.csv()
     except nmap.PortScannerError:
         return None
 
-print(launch_scan("192.168.1.1","80"))
+
+nm=launch_scan("scanme.nmap.org","")
+if nm is not None:
+    for host in nm.all_hosts():
+        for port in nm[host]["tcp"].keys():
+            print(f"Port {port} → {get_status(port)}")
