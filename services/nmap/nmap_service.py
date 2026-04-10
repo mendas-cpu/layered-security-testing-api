@@ -47,6 +47,4 @@ def launch_scan(target_address,target_ports=""):
 
 nm=launch_scan("scanme.nmap.org","")
 if nm is not None:
-    for host in nm.all_hosts():
-        for port in nm[host]["tcp"].keys():
-            print(f"Port {port} {get_status(port)}")
+    print(nm)
