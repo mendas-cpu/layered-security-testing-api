@@ -2,6 +2,7 @@ import nmap
 
 #get vulnerability status based on what nmap detected
 #as open ports and then outputing it to the ui as (NORMAL,MEDIUM,HIGH,CRITICAL)
+#fontend dev should use this dict to display it
 def get_status(port):
     status = {
         #receiving requests
