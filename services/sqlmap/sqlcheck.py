@@ -6,7 +6,7 @@ def build_cmd(target, cookie=None):
     command = [
         "sqlmap", "-u", target,
         "--batch", "--level=2", "--risk=1", "-o",
-        "--output-dir=sqlmap"
+        "--output-dir=sqlmapoutput"
     ]
     if cookie:
         command.append(f"--cookie={cookie}")
