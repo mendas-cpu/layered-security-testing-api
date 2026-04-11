@@ -1,4 +1,13 @@
 .env
-.idea
-__pycache__
-services/__pycache__
+.env.*
+.idea/
+.venv/
+venv/
+__pycache__/
+**/__pycache__/
+*.pyc
+
+# Generated scanner output
+sqlmapoutput/
+services/sqlmap/localhost/
+services/sqlmap/results-*.csv
