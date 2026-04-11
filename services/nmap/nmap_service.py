@@ -44,8 +44,3 @@ def launch_scan(target_address,target_ports=""):
             return nm.csv()
     except nmap.PortScannerError:
         return None
-
-
-nm=launch_scan("scanme.nmap.org","")
-if nm is not None:
-    print(nm)

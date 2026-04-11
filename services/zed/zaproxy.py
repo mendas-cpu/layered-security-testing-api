@@ -1,8 +1,6 @@
-from pprint import pprint
+
 from zapv2 import ZAPv2
-from dotenv import load_dotenv
 import time
-import os
 
 class ZapScanner:
     def __init__(self, target, api_key):
@@ -71,8 +69,3 @@ class ZapScanner:
             alerts = self.zap.alert.alerts(baseurl=self.target, start=st, count=pg)
 
         return alert_dict
-load_dotenv()
-target = "https://public-firing-range.appspot.com"
-api_key = os.getenv("ZAP_KEY")
-ZapScanner = ZapScanner(target, api_key)
-pprint(ZapScanner.results())

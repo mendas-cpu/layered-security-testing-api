@@ -91,4 +91,3 @@ def parse_sqlmap_output(output, target):
         })
 
     return scan_result
-print(sqlmap("http://localhost:8888/vulnerabilities/sqli/?id=1&Submit=Submit","PHPSESSID=563jbi2311688esjjin6fhdfk7; security=low"))
