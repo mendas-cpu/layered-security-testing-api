@@ -1,0 +1,5 @@
+fastapi
+uvicorn[standard]
+python-dotenv
+python-nmap
+python-owasp-zap-v2.4
