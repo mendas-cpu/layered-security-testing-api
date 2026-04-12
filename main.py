@@ -2,6 +2,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, HttpUrl
 from typing import Optional
+from urllib.parse import urlparse
 import asyncio
 from services.sqlmap.sqlcheck import sqlmap
 from services.nmap.nmap_service import launch_scan
@@ -11,6 +12,9 @@ import os
 dotenv.load_dotenv()
 ZAP_KEY = os.getenv("ZAP_KEY")
 
+def extract_host(url):
+    parsed = urlparse(url)
+    return parsed.hostname
 app = FastAPI()
 class SqlmapRequest(BaseModel):
     target: str
@@ -51,10 +55,11 @@ def scan_sqlmap(request: SqlmapRequest):
 # nmap route
 @app.post("/scan/nmap")
 def scan_nmap(request: NmapRequest):
-    result = launch_scan(request.target, request.ports)
+    host = extract_host(request.target)
+    result = launch_scan(host, request.ports)
     if result is None:
         raise HTTPException(status_code=500, detail="Nmap scan failed")
-    return {"target": request.target, "tool": "nmap", "csv": result}
+    return {"target": request.target, "tool": "nmap", "results": result}
 
 # zap route
 @app.post("/scan/zap")
@@ -70,7 +75,7 @@ async def scan_all(request: ScanAllRequest):
 
     # run all 3 in parallel using thread pool from the asyncio module
     sqlmap_task = loop.run_in_executor(None, sqlmap, request.target, request.cookie)
-    nmap_task = loop.run_in_executor(None, launch_scan, request.target, request.ports)
+    nmap_task = loop.run_in_executor(None, launch_scan, extract_host(request.target), request.ports)
     zap_task = loop.run_in_executor(None, lambda: ZapScanner(request.target, ZAP_KEY).results())
 
     # wait for all 3 to finish
@@ -82,6 +87,6 @@ async def scan_all(request: ScanAllRequest):
 
     return {
         "sqlmap": sqlmap_result,
-        "nmap": {"csv": nmap_result},
+        "nmap": {"results": nmap_result},
         "zap": {"alerts": zap_result}
     }
