@@ -2,19 +2,16 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, HttpUrl
 from typing import Optional
-from urllib.parse import urlparse
 import asyncio
-from services.sqlmap.sqlcheck import sqlmap
-from services.nmap.nmap_service import launch_scan
-from services.zed.zaproxy import ZapScanner
+from services.sqlmap.sqlcheck import SqlInjectionLayer
+from services.nmap.nmap_service import PortDetectingLayer
+from services.zed.zaproxy import ZapLayer
 import dotenv
 import os
 dotenv.load_dotenv()
 ZAP_KEY = os.getenv("ZAP_KEY")
 
-def extract_host(url):
-    parsed = urlparse(url)
-    return parsed.hostname
+
 app = FastAPI()
 class SqlmapRequest(BaseModel):
     target: str
@@ -22,7 +19,7 @@ class SqlmapRequest(BaseModel):
 
 class NmapRequest(BaseModel):
     target: str
-    ports: Optional[str] = ""
+    ports: Optional[str] = None
 
 class ZapRequest(BaseModel):
     target: str
@@ -30,7 +27,7 @@ class ZapRequest(BaseModel):
 class ScanAllRequest(BaseModel):
     target: str
     cookie: Optional[str] = None
-    ports: Optional[str] = ""
+    ports: Optional[str] = None
 
 #cors config
 app.add_middleware(
@@ -47,7 +44,7 @@ def root():
 # sqlmap route
 @app.post("/scan/sqlmap")
 def scan_sqlmap(request: SqlmapRequest):
-    result = sqlmap(request.target, request.cookie)
+    result = SqlInjectionLayer(request.target, request.cookie).sqlmap()
     if "error" in result:
         raise HTTPException(status_code=500, detail=result["error"])
     return result
@@ -55,8 +52,8 @@ def scan_sqlmap(request: SqlmapRequest):
 # nmap route
 @app.post("/scan/nmap")
 def scan_nmap(request: NmapRequest):
-    host = extract_host(request.target)
-    result = launch_scan(host, request.ports)
+    scanner = PortDetectingLayer(request.target,request.ports)
+    result = scanner.launch_scan()
     if result is None:
         raise HTTPException(status_code=500, detail="Nmap scan failed")
     return {"target": request.target, "tool": "nmap", "results": result}
@@ -64,19 +61,19 @@ def scan_nmap(request: NmapRequest):
 # zap route
 @app.post("/scan/zap")
 def scan_zap(request: ZapRequest):
-    scanner = ZapScanner(request.target, ZAP_KEY)
+    scanner = ZapLayer(request.target, ZAP_KEY)
     result = scanner.results()
     return {"target": request.target, "tool": "zap", "alerts": result}
 
 # run all 3 tools concurrently
 @app.post("/scan/all")
 async def scan_all(request: ScanAllRequest):
-    loop = asyncio.get_event_loop()
+    loop = asyncio.get_running_loop()
 
     # run all 3 in parallel using thread pool from the asyncio module
-    sqlmap_task = loop.run_in_executor(None, sqlmap, request.target, request.cookie)
-    nmap_task = loop.run_in_executor(None, launch_scan, extract_host(request.target), request.ports)
-    zap_task = loop.run_in_executor(None, lambda: ZapScanner(request.target, ZAP_KEY).results())
+    sqlmap_task = loop.run_in_executor(None,SqlInjectionLayer(request.target,request.cookie).sqlmap)
+    nmap_task = loop.run_in_executor(None,PortDetectingLayer(request.target,request.ports).launch_scan)
+    zap_task = loop.run_in_executor(None,ZapLayer(request.target, ZAP_KEY).results)
 
     # wait for all 3 to finish
     sqlmap_result, nmap_result, zap_result = await asyncio.gather(

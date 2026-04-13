@@ -1,8 +1,7 @@
-
 from zapv2 import ZAPv2
 import time
 
-class ZapScanner:
+class ZapLayer:
     def __init__(self, target, api_key):
         self.scan_id = None
         self.target = target
@@ -22,8 +21,6 @@ class ZapScanner:
                 self.zap.ajaxSpider.stop()
                 print("Ajax spider timed out.")
                 break
-            print('Ajax Spider status: ' + self.zap.ajaxSpider.status)
-            time.sleep(2)
 
         print("Ajax spider completed")
 
@@ -34,7 +31,7 @@ class ZapScanner:
             return
         self.scan_id = self.zap.ascan.scan(self.target)
         while int(self.zap.ascan.status(self.scan_id)) < 100:
-            print('Scan progress %: {}'.format(self.zap.ascan.status(self.scan_id)))
+            print('Scanning in progress')
             time.sleep(5)
         print("Active scan completed")
         return self.zap.alert.alerts(baseurl=self.target, start=0, count=5000)
@@ -46,7 +43,6 @@ class ZapScanner:
         alerts = self.zap.alert.alerts(baseurl=self.target, start=st, count=pg)
 
         while len(alerts) > 0:
-            print('Reading {} alerts from {}'.format(pg, st))
             for alert in alerts:
                 plugin_id = int(alert.get('pluginId'))
                 if plugin_id in blacklist:
@@ -68,14 +64,6 @@ class ZapScanner:
     #returning the alerts arr after initiating exploration and active scanning
     def results(self):
         self.exploring_app()
-        scan_id = self.zap.spider.scan(self.target)
-        while int(self.zap.spider.status(scan_id)) < 100:
-            print("Spider progress:", self.zap.spider.status(scan_id))
-            time.sleep(2)
-
-        while int(self.zap.pscan.records_to_scan) > 0:
-            print("Remaining:", self.zap.pscan.records_to_scan)
-            time.sleep(2)
 
         print("Starting active scan")
         self.active_scan()
