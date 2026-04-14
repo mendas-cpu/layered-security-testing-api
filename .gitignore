@@ -4,3 +4,4 @@ __pycache__
 services/__pycache__
 sqlmapoutput
 services/__init__.py
+__init__.py
