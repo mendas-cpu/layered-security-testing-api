@@ -3,8 +3,9 @@
 Security testing is a critical step before deploying any web application to production. Vulnerabilities like SQL injection, exposed services, and misconfigurations can lead to data breaches and system compromise.  
 
 This project provides an automated way to scan web applications and detect common security issues using a unified API.
+---
 
-##Important
+## Important
 Only use it on web apps that u have authority on or has the right to do so
 This project aims to provide precise testing results, however use it at ur own responsibility
 
@@ -51,10 +52,7 @@ cd security-scanner
 pip install -r requirements.txt
 ```
 
-# ▶️ Running the Project
-```markdown
-## ▶️ Running the API
-```
+# Running the Project
 ```bash
 uvicorn main:app --reload
 java -jar "C:\Program Files\ZAP\Zed Attack Proxy\zap-2.17.0.jar" -daemon -port 8090 -config api.key=rsv5fmq01ufr3v7parvhgjgi7j
