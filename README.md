@@ -26,6 +26,7 @@ This project aims to provide precise testing results, however use it at ur own r
 ---
 
 ## Project Structure
+```markdown
 │   .env
 │   .gitignore
 │   main.py
@@ -44,6 +45,7 @@ This project aims to provide precise testing results, however use it at ur own r
    │           
    ├───zed
        │   zaproxy.py
+```
 ## Installation
 
 ```bash
