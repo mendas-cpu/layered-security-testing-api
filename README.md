@@ -57,7 +57,7 @@ pip install -r requirements.txt
 # Running the Project
 ```bash
 uvicorn main:app --reload
-java -jar "C:\Program Files\ZAP\Zed Attack Proxy\zap-2.17.0.jar" -daemon -port 8090 -config api.key=rsv5fmq01ufr3v7parvhgjgi7j
+java -jar "C:\Program Files\ZAP\Zed Attack Proxy\zap-2.17.0.jar" -daemon -port 8090 -config api.key="APIKEY"
 ```
 
 
