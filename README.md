@@ -49,8 +49,8 @@ This project aims to provide precise testing results, however use it at ur own r
 ## Installation
 
 ```bash
-git clone https://github.com/mendas-cpu/security-scanner.git
-cd security-scanner
+git clone https://github.com/mendas-cpu/layered-security-testing-api.git
+cd layered-security-testing-api
 pip install -r requirements.txt
 ```
 
